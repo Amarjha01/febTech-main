@@ -1,0 +1,16 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Outfit", sans-serif;
+  width: 99.9%;
+  /* border:2px solid black; */
+}
+body #root{
+  width: 100% !important;
+}
+header .navbar{
+  background-color: transparent;
+}

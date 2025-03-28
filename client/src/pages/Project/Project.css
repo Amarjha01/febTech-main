@@ -1,0 +1,111 @@
+.p-shadow {  
+  box-shadow: 4px 4px 0px 0px #facc15;
+}
+
+.p-shadow:hover {
+    box-shadow: 4px 4px 0px 0px #1136FF;
+    background-color: #facc15;
+}
+.p-card {
+  left: -15px;
+  top: -15px;
+  transition: left 0.3s ease-out;
+}
+
+.p-card:hover {
+    left: 0;
+    transition: left 0.3s ease;
+}
+
+.pb-shadow {
+  box-shadow: 6px 6px 0px 0px black;
+  color: black;
+  transition: box-shadow 0.3s ease;
+  
+}
+
+.pb-shadow:active {
+  background-color: #1136FF;
+  box-shadow: 10px 10px 0px 0px #facc15;
+  color: white;
+}
+
+.pl-button:hover {
+  fill: white;
+}
+
+.pn-shadow {
+  box-shadow: 4px 4px 0px 0px #facc15;
+  transition: box-shadow 0.4s ease
+}
+.pn-shadow:hover {
+  box-shadow: 4px 4px 0px 0px black;
+  background-color: #1136FF;
+  transition: box-shadow 0.3s ease;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-custom-pulse {
+  animation-name: pulse;
+  animation-duration: 4s; /* Custom animation duration */
+  animation-iteration-count: infinite;
+}
+
+.animate-custom-pulse2 {
+  animation-name: pulse;
+  animation-duration: 4s; /* Custom animation duration */
+  background-color: #FFF4E8;
+  animation-iteration-count: infinite;
+}
+
+@keyframes strike {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  10% {
+    transform: translateX(-30px) rotate(0);
+  }
+  50% {
+    transform: translateY(-150px) translateX(-150px) rotate(180deg);
+    
+  }
+  60% {
+    transform: translateX(-100px) translateY(-150px) rotate(0);
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+  }
+}
+
+/* Styling for the triangle */
+.triangle {
+  height: 20px;
+  width: 20px;
+  border: 1px solid transparent;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: strike 4s ease-in-out infinite;
+}
+.trianglet {
+  height: 20px;
+  width: 20px;
+  border: 1px solid transparent;
+  position: absolute;
+  top: 30%;
+  left: 80%;
+  transform: translateX(-50%);
+  animation: strike 4s ease-in-out infinite;
+}

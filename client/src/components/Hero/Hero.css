@@ -1,0 +1,7 @@
+.hero_shadow {
+  box-shadow: 10px 10px 0px 0px rgb(0, 0, 0)
+}
+.hero_sliding {
+  position: relative; /* Position relative for animation */
+  animation: slideRight 4s linear infinite; /* Animation definition */
+}

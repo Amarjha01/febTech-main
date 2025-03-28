@@ -1,0 +1,24 @@
+.responsive-map {
+    height: 80vh;
+    position: relative;
+    overflow: hidden;
+    padding: auto;
+
+}
+
+.responsive-map iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.cclick:focus {
+    background-color: black;
+    color: white;
+    box-shadow: 6px 6px 0 0 #1136FF;
+    border: none;
+    outline: none;
+
+}
