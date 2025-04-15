@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import ScrollToTop from "./components/Global/ScrollToTop";
+import PopUpContact from "./components/Global/PopUpContact";
 
 function App() {
   useEffect(() => {
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <>
+    <PopUpContact />
       <Header />
       <ScrollToTop />
       <Outlet />
