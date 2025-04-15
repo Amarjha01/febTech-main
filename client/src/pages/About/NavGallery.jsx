@@ -1,4 +1,5 @@
 import React from "react";
+import { FaPlay } from "react-icons/fa6";
 
 const ImageGallery = ({ images }) => (
   <div>
@@ -24,16 +25,30 @@ const VideoGallery = ({ videos }) => (
     <h3 className="lg:w-1/5 mb-10 mx-auto text-center rounded-md a-shadow-sm font-semibold py-2 px-3 text-white bg-[#1136ff] text-xl w-[280px]">
       Videos
     </h3>
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       {videos.map((item, index) => (
-        <div key={index} className="w-full">
-          <iframe
+        <a target="_blank"
+          key={index}
+          href={item.links}
+          className="w-full aspect-[15/16]  bg-rose-400/40 overflow-hidden rounded-3xl hover:scale-105 transition-all duration-200 ease-in cursor-pointer relative shadow-xl shadow-[#eeeff3] selection:bg-transparent "
+        >
+          {/* <iframe
             src={item.src}
             title={item.alt}
             className="w-full h-64 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
             allowFullScreen
-          ></iframe>
-        </div>
+          ></iframe> */}
+          {/* instagram rells appear here */}
+          <img
+            className="w-full h-full bg-cover "
+            src={
+              item.src }
+            alt={item.alt}
+          />
+          <div className=" absolute w-full h-full border flex items-center justify-center top-0 active:scale-110 active:duration-500 focus:scale-110">
+            <FaPlay size={40} color="#ffff" />
+          </div>
+        </a>
       ))}
     </div>
   </div>
@@ -98,10 +113,6 @@ const NavGallery = () => {
       alt: "Dummy Image 3",
     },
     {
-      src: "/FebTechGallery/febG12.jpg",
-      alt: "Dummy Image 3",
-    },
-    {
       src: "/FebTechGallery/febG13.jpg",
       alt: "Dummy Image 3",
     },
@@ -113,28 +124,19 @@ const NavGallery = () => {
 
   const videos = [
     {
-      src: "https://www.youtube.com/embed/tgbNymZ7vqY",
+      src: "/FebTechGallery/01.png",
       alt: "Dummy Video 1",
+      links: "https://www.instagram.com/reel/C--TTyJSio7/"
     },
     {
-      src: "https://www.youtube.com/embed/tgbNymZ7vqY",
+      src: "/FebTechGallery/02.png",
       alt: "Dummy Video 2",
+       links: "https://www.instagram.com/reel/C7dvRE5yJP8"
     },
     {
-      src: "https://www.youtube.com/embed/tgbNymZ7vqY",
-      alt: "Dummy Video 1",
-    },
-    {
-      src: "https://www.youtube.com/embed/tgbNymZ7vqY",
-      alt: "Dummy Video 2",
-    },
-    {
-      src: "https://www.youtube.com/embed/tgbNymZ7vqY",
-      alt: "Dummy Video 1",
-    },
-    {
-      src: "https://www.youtube.com/embed/tgbNymZ7vqY",
-      alt: "Dummy Video 2",
+      src: "/FebTechGallery/03.png",
+      alt: "Dummy Video 3",
+       links: "https://www.instagram.com/reel/DICGLS2o6px/"
     },
   ];
 
