@@ -6,6 +6,7 @@ import cors from 'cors';
 
 import { contact } from './controller/contact.js';
 import {career, uploadMiddleware} from './controller/carrer.js'
+import { welcome } from './controller/welcome.js';
 
 
 const PORT = process.env.PORT || 5000;
@@ -26,7 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 
-
+app.get('/', welcome)
 app.post('/api/contactUs', contact);
 app.post('/api/career',  uploadMiddleware, career);
 

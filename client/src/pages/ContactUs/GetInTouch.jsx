@@ -18,7 +18,7 @@ const GetInTouch = () => {
     setLoading(true);
 
     try {
-      let response = await fetch("http://localhost:5000/api/contactUs", {
+      let response = await fetch("https://api.febtech.in/api/contactUs", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

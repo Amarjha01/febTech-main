@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
+import ScrollToTop from "./components/Global/ScrollToTop";
 
 function App() {
   useEffect(() => {
@@ -14,6 +15,7 @@ function App() {
   return (
     <>
       <Header />
+      <ScrollToTop />
       <Outlet />
       <Footer />
     </>

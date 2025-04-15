@@ -20,10 +20,11 @@ export const career = async (req, res) => {
       return res.status(400).json({ success: false, message: "File is required" });
     }
 
+
     const transporter = nodemailer.createTransport({
-      host: "us2.smtp.mailhostbox.com",
-      port: 587,
-      secure: false, // False for STARTTLS
+      host: "smtp.hostinger.com",
+      port: 465,
+      secure: true, 
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
@@ -34,17 +35,17 @@ export const career = async (req, res) => {
     });
 
     const mailOptions = {
-      from: '"Amar Jha" <donotreply@amarjha.tech>',
-      to: "amar@febtech.in",
+      from: '"FebTech Server" <donotreply@febtech.in>',
+      to: " rajat@febtech.in , nandani@febtech.in", // ✅ Multiple recipients separated by a comma
       subject: "New Career Application",
       text: `Name: ${full_name}
-            Email: ${email}
-            Phone No: ${mobile_number}
-            Apply For: ${apply_for}`,
+             Email: ${email}
+             Phone No: ${mobile_number}
+             Apply For: ${apply_for}`,
       attachments: [
         {
-          filename: file.originalname, // ✅ File name
-          content: file.buffer, // ✅ File content as buffer
+          filename: file.originalname,
+          content: file.buffer,
         },
       ],
     };

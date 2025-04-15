@@ -8,9 +8,9 @@ export const contact = async (req, res) => {
     console.log('req body:', req.body)
 
     const transporter = nodemailer.createTransport({
-      host: "us2.smtp.mailhostbox.com",
-      port: 587,
-      secure: false, // False for STARTTLS
+      host: "smtp.hostinger.com",
+      port: 465,
+      secure: true, // False for STARTTLS
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
@@ -21,8 +21,8 @@ export const contact = async (req, res) => {
     });
 
     const mailOptions = {
-      from: '"Amar Jha" <donotreply@amarjha.tech>',
-      to: "amar@febtech.in",
+      from: '"FebTech" <donotreply@febtech.in>',
+      to: "rajat@febtech.in , nandani@febtech.in",
       subject: "New Enquary From ContactUs Page",
       text: `Name : ${full_name}
         Email : ${email}

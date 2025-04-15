@@ -107,7 +107,8 @@ console.log('log:' , careerData)
     formData.append("file", careerData.file);
   
     try {
-      let response = await fetch("http://localhost:5000/api/career", {
+      // let response = await fetch("http://localhost:5000/api/career", {
+      let response = await fetch("https://api.febtech.in/api/career", {
         method: "POST",
         body: formData, // ✅ Sending FormData directly
       });

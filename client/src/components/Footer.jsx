@@ -113,7 +113,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="/contact-us"
+                      to="/contactUs"
                       className="text-sm md:text-base lg:text-lg xl:text-lg text-gray-800 hover:text-[#1136ff] whitespace-nowrap"
                     >
                       Contact Us
@@ -145,7 +145,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="/contact-us"
+                      to="/contactUs"
                       className="text-sm md:text-base lg:text-lg xl:text-lg text-gray-800 hover:text-[#1136ff] whitespace-nowrap"
                     >
                       Our Contact

@@ -1,125 +1,83 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import GlobalAxios from "../../../GlobalAxios/GlobalAxios";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { PropagateLoader } from "react-spinners";
-import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
+import React, { useState, useEffect } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const CertificateData = () => {
-  const [loading, setLoading] = useState(false);
-  const [certificateId, setCertificateId] = useState("");
-  const [certificate, setCertificate] = useState(null);
-  const [isVerified, setIsVerified] = useState(null);
+  const [data, setData] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const [search, setSearch] = useState("");
 
-  const handleVerify = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setIsVerified(null);
-    try {
-      const certificateId = e.target.certificateId.value;
-      const response = await GlobalAxios.get(
-        `/user/certificate/verify/${certificateId}`
-      );
-      const data = response.data.data;
-      console.log(data);
+  useEffect(() => {
+    // Load data from public folder
+    fetch("/certificate_data.json")
+      .then((res) => res.json())
+      .then((json) => {
+        setData(json);
+        setFiltered(json);
+      })
+      .catch((err) => {
+        console.error("Error loading certificate data:", err);
+      });
+  }, []);
 
-      if (response.data.status === "success") {
-        if (response.data.verified) {
-          setCertificate({
-            certificate: data.certificate,
-            name: data.name,
-            issued_date: data.issued_date,
-          });
-          setIsVerified(true);
-          toast.success("Certificate found successfully");
-        } else {
-          setCertificate(null);
-          setIsVerified(false);
-        }
-      }
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-      setLoading(false);
-      toast.error("An error occurred. Please try again.");
-    }
-  };
-
-  const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = certificate.certificate;
-    link.download = `Certificate-${certificateId}.jpg`; // Assuming the certificate is an image file
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  useEffect(() => {
+    const lower = search.toLowerCase();
+    const filteredData = data.filter((item) => {
+      const name = (item["Unnamed: 0"] || "").toLowerCase();
+      const certNum = (item["Unnamed: 3"] || "").toLowerCase();
+      return name.includes(search.toLowerCase()) || certNum.includes(search.toLowerCase());
+    });
+    
+    setFiltered(filteredData);
+  }, [search, data]);
 
   return (
-    <div className="w-[100%]  min-h-screen flex flex-col items-center bg-gray-100 py-10">
-      <ToastContainer />
-      <h1 className="text-3xl font-bold mb-6">Certificate Verification</h1>
-      <form
-        className="w-full max-w-lg bg-white p-8 shadow-md rounded-lg flex flex-col gap-4"
-        onSubmit={handleVerify}
-      >
-        <label htmlFor="certificateId" className="font-semibold text-gray-700">
-          Certificate Number
-        </label>
+    <div className="p-4 min-h-screen bg-gray-100">
+      <h1 className="text-2xl font-bold mb-4">Certificate Records</h1>
+      <div className="mb-4 flex items-center gap-2">
+        <AiOutlineSearch className="text-xl" />
         <input
-          required
-          onChange={(e) => setCertificateId(e.target.value)}
           type="text"
-          id="certificateId"
-          className="p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[rgb(17,54,255)]"
+          placeholder="Search by name or certificate number"
+          className="border p-2 rounded-md w-full max-w-md"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
-        {loading ? 
-        <div className="mt-8 text-center">
-          <PropagateLoader color="#1136ff" />
-        </div> : <button
-          type="submit"
-          className="bg-[#1136ff] text-white py-2 rounded-lg hover:bg-[#1336fd] transition duration-300"
-        >
-          Verify
-        </button>
-      }
-      </form>
-
-      
-
-      {!loading && isVerified === false && (
-        <div className="mt-4 flex items-center text-red-500">
-          <AiOutlineCloseCircle className="mr-2" size={24} />
-          <p className="text-lg">The certificate number is invalid.</p>
-        </div>
-      )}
-
-      {!loading && isVerified && certificate && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full lg:w-[70%]  mt-8 bg-white p-8 shadow-md rounded-lg flex flex-col items-center gap-4"
-        >
-          <div className="flex items-center text-green-500">
-            <AiOutlineCheckCircle className="mr-2" size={24} />
-            <p className="text-xl font-semibold">Certificate Verified</p>
-          </div>
-          <p className="text-lg">Student Name: {certificate.name}</p>
-          <p className="text-lg">Issue Date: {certificate.issued_date}</p>
-          <img
-            src={certificate.certificate}
-            alt="Certificate"
-            className="w-full mb-4 rounded-lg"
-          />
-          <button
-            onClick={handleDownload}
-            className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition duration-300"
-          >
-            Download Certificate
-          </button>
-        </motion.div>
-      )}
+      </div>
+      <div className="overflow-auto rounded-lg shadow max-h-[70vh]">
+        <table className="w-full table-auto bg-white text-sm text-left">
+          <thead className="bg-gray-200 sticky top-0">
+            <tr>
+              <th className="p-2 border">Certificate Number</th>
+              <th className="p-2 border">Name</th>
+              {/* <th className="p-2 border">Email</th> */}
+              <th className="p-2 border">Course</th>
+              <th className="p-2 border">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.length > 0 ? (
+              filtered.map((item, index) => (
+                <tr key={index} className="hover:bg-gray-100">
+                <td className="p-2 border">{item["Unnamed: 3"]}</td>
+                <td className="p-2 border">{item["Unnamed: 0"]}</td>
+                {/* <td className="p-2 border">N/A</td>  */}
+                <td className="p-2 border">{item["Unnamed: 2"]}</td>
+                <td className="p-2 border">
+                  {new Date(item["Unnamed: 1"]).toLocaleDateString()}
+                </td>
+              </tr>
+              
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className="p-4 text-center text-gray-500">
+                  No certificates found.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
