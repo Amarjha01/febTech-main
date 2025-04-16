@@ -32,13 +32,13 @@ const PopUpContact = () => {
   } = useForm();
 
   const FORM_ACTION_URL =
-    "https://docs.google.com/forms/d/e/1FAIpQLSehtU9SNWbKdVn3Vug1aYog8pLX_z9WCKDfLVYogoV3qA59SA/formResponse";
+    "https://docs.google.com/forms/u/0/d/e/1FAIpQLSeGwTP36xJAhrn4ALbfBqcYQE3jLe0F5zHOHL1T2gU7_S0dow/formResponse";
 
-  const ENTRY_NAME = "entry.2005620554";
-  const ENTRY_EMAIL = "entry.1045781291";
-  const ENTRY_PHONE = "entry.1166974658";
-  const ENTRY_SERVICE = "entry.839337160";
-  const ENTRY_MESSAGE = "entry.1065046570";
+  const ENTRY_NAME = "entry.624530064";
+  const ENTRY_EMAIL = "entry.1240300746";
+  const ENTRY_PHONE = "entry.1539245784";
+  const ENTRY_SERVICE = "entry.1840191769";
+  const ENTRY_MESSAGE = "entry.143747699";
 
   const onSubmit = (data) => {
     setIsSubmitting(true);
