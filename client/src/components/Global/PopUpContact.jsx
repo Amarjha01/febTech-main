@@ -128,7 +128,7 @@ const PopUpContact = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              Enquire Now
+              Request Quote
             </motion.h2>
 
             <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="space-y-4">
